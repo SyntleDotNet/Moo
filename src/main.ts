@@ -5,7 +5,7 @@
 import "./style/style.scss";
 
 class Application {
-    readonly seizureMode: boolean = false;
+    private seizureMode: boolean = false;
     readonly numCharactersPerUpdate = 1;
     private rulesDiv: HTMLElement;
     
@@ -14,17 +14,19 @@ class Application {
 
     private lastBlinkTime = 0;
 
-    private ancientText: string = "The Moo is sick bruh. It is your job to rescue the sacred Moo for the future generations of players. A small fee of 22BTC is required to unlock this quest.";// Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-                                    // "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed tortor id elit lacinia facilisis. Sed volutpat elit a molestie maximus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris eget leo sapien. Nam risus lorem, sodales in viverra ut, faucibus ac ante. Curabitur at lacus dignissim, facilisis odio ut, molestie lectus. Nullam pharetra lorem ac nibh finibus luctus ut ut arcu. Phasellus vitae varius erat. Nulla sit amet efficitur justo."+
-                                    // "Donec euismod feugiat ultricies. Nullam ac consequat erat, et aliquet lacus. Cras at maximus massa. Integer ex neque, interdum ut urna eget, tristique semper augue. Etiam elit lorem, interdum eget tincidunt ut, pulvinar eget sapien. Donec sit amet lacus vel sapien consequat sodales. Vivamus feugiat eros sem. Phasellus hendrerit sapien at tortor convallis dapibus. Suspendisse dui elit, bibendum sit amet felis quis, elementum blandit arcu. Nam vitae orci elit."+
-                                    // "Pellentesque fringilla eleifend nisi sed egestas. Nam dapibus odio ultricies egestas tempor. Vivamus tempus consectetur mi, quis malesuada neque finibus at. Pellentesque suscipit, sem eu semper venenatis, ipsum sem fermentum massa, a rutrum diam ante eget eros. Donec dapibus sed ex quis viverra. Fusce suscipit nisi pretium ligula luctus, et dapibus ex fermentum. Mauris ut quam diam. Etiam faucibus pellentesque nisi eu vulputate. Quisque luctus, elit id hendrerit efficitur, est purus condimentum orci, sit amet ultricies eros quam at nunc. Morbi cursus pellentesque porta. In in lacus aliquet, volutpat diam vel, placerat lorem."+
-                                    // "Nulla facilisi. Ut quis orci eu odio congue dictum non id est. Nunc at orci ac ante venenatis tincidunt. Mauris nisl arcu, ultrices non consectetur nec, gravida quis libero. Donec cursus luctus ex, nec sagittis est dapibus at. Ut et ultricies sapien. Curabitur pretium nisl ut nisi porttitor consequat."+
-                                    // "Vestibulum id sapien nunc. Phasellus consectetur condimentum nisl, in elementum eros pharetra vel. Curabitur placerat eu urna ac interdum. Sed at luctus dui. Vivamus dignissim, leo in egestas scelerisque, ipsum felis rutrum ex, id ullamcorper nibh odio in diam. Etiam commodo mauris at neque egestas, vel facilisis massa lacinia. Aenean sodales purus lacus.";
+    private ancientText: string = "The Moo is sick bruh. It is your job to rescue the sacred Moo for the future generations of players. A small fee of 22BTC is required to unlock this quest. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."+
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed tortor id elit lacinia facilisis. Sed volutpat elit a molestie maximus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris eget leo sapien. Nam risus lorem, sodales in viverra ut, faucibus ac ante. Curabitur at lacus dignissim, facilisis odio ut, molestie lectus. Nullam pharetra lorem ac nibh finibus luctus ut ut arcu. Phasellus vitae varius erat. Nulla sit amet efficitur justo."+
+                                    "Donec euismod feugiat ultricies. Nullam ac consequat erat, et aliquet lacus. Cras at maximus massa. Integer ex neque, interdum ut urna eget, tristique semper augue. Etiam elit lorem, interdum eget tincidunt ut, pulvinar eget sapien. Donec sit amet lacus vel sapien consequat sodales. Vivamus feugiat eros sem. Phasellus hendrerit sapien at tortor convallis dapibus. Suspendisse dui elit, bibendum sit amet felis quis, elementum blandit arcu. Nam vitae orci elit."+
+                                    "Pellentesque fringilla eleifend nisi sed egestas. Nam dapibus odio ultricies egestas tempor. Vivamus tempus consectetur mi, quis malesuada neque finibus at. Pellentesque suscipit, sem eu semper venenatis, ipsum sem fermentum massa, a rutrum diam ante eget eros. Donec dapibus sed ex quis viverra. Fusce suscipit nisi pretium ligula luctus, et dapibus ex fermentum. Mauris ut quam diam. Etiam faucibus pellentesque nisi eu vulputate. Quisque luctus, elit id hendrerit efficitur, est purus condimentum orci, sit amet ultricies eros quam at nunc. Morbi cursus pellentesque porta. In in lacus aliquet, volutpat diam vel, placerat lorem."+
+                                    "Nulla facilisi. Ut quis orci eu odio congue dictum non id est. Nunc at orci ac ante venenatis tincidunt. Mauris nisl arcu, ultrices non consectetur nec, gravida quis libero. Donec cursus luctus ex, nec sagittis est dapibus at. Ut et ultricies sapien. Curabitur pretium nisl ut nisi porttitor consequat."+
+                                    "Vestibulum id sapien nunc. Phasellus consectetur condimentum nisl, in elementum eros pharetra vel. Curabitur placerat eu urna ac interdum. Sed at luctus dui. Vivamus dignissim, leo in egestas scelerisque, ipsum felis rutrum ex, id ullamcorper nibh odio in diam. Etiam commodo mauris at neque egestas, vel facilisis massa lacinia. Aenean sodales purus lacus.";
 
     constructor() {
         this.rulesDiv = document.getElementById("rules");
         this.rulesDiv.innerHTML = "";
         // this.rulesDiv.style.display = "";
+
+        this.seizureMode = this.getParam("seizureMode") != undefined;
 
         window.requestAnimationFrame(() => this.updateRulesText());
 
@@ -64,6 +66,69 @@ class Application {
         };
 
         setInterval(changeWord, 10000);
+
+        let cow = <HTMLObjectElement>document.getElementById("cow");
+        // cow.addEventListener("click", () => {
+
+        let clickTime = 0;
+        document.getElementById("cowClickBox").addEventListener("mousedown", () => {
+            cow.data = "iconhyp.svg";
+
+            cow.onload = () => {
+                // let eye = <SVGGraphicsElement><any>cow.contentDocument.getElementById("Eye");
+
+                // let b = eye.getBBox();
+
+                // let rotateX = b.x + b.width * 0.5;
+                // let rotateY = b.y + b.height * 0.5;
+
+                // let t = cow.contentDocument.getElementById("Eye2");
+                // console.log(t);
+
+                // setInterval(() => t.setAttribute("transform", "rotate(" + ((Date.now() * 0.1) % 360) + "," + rotateX + "," + rotateY + ")"), 16);
+
+                clickTime = Date.now() * 0.001;
+
+                setInterval(() => {
+                    let angle = (Date.now() * 0.1) % 360;
+                    this.rotateSVGElementAboutCenter("EyeL", angle);
+                    angle *= -2;
+                    this.rotateSVGElementAboutCenter("EyeR", angle);
+
+                    let time = Date.now() * 0.001;
+                    let timeSinceClick = time - clickTime;
+
+                    if (timeSinceClick > Math.PI / 2) {
+                        timeSinceClick = Math.PI / 2;
+                    }
+                    let scale = 1 + 3 * Math.sin(timeSinceClick);
+                    cow.style.transform = "scale(" + scale + ")";
+                }, 16);
+                // setInterval(() => this.rotateSVGElementAboutCenter("EyeR", angle), 16);
+            }
+
+        });
+
+        if (this.seizureMode) {
+            document.body.style.background = "unset";
+        }
+    }
+
+    rotateSVGElementAboutCenter(nameOfElement: string, angle: number) {
+        let cow = <HTMLObjectElement>document.getElementById("cow");
+        let element = <SVGGraphicsElement><any>cow.contentDocument.getElementById(nameOfElement);
+
+        let b = element.getBBox();
+
+        let rotateX = b.x + b.width * 0.5;
+        let rotateY = b.y + b.height * 0.5;
+
+        element.setAttribute("transform", "rotate(" + angle + "," + rotateX + "," + rotateY + ")");
+    }
+
+    getParam(key: string): string {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(key);
     }
 
     updateRulesText() {
@@ -93,9 +158,10 @@ class Application {
                 }
         
                 if (this.seizureMode) {
+                    
                     document.body.style.backgroundColor = "rgb(" + (Math.random() * 256) + "," + (Math.random() * 256) + "," + (Math.random() * 256) + ")";
             
-                    document.body.scrollTop = Math.random() * (this.rulesDiv.clientHeight + document.body.clientHeight);
+                    // document.body.scrollTop = Math.random() * (this.rulesDiv.clientHeight + document.body.clientHeight);
                 }
                 // document.body.scrollTop = 10000;
         }
@@ -103,14 +169,14 @@ class Application {
         let time = Date.now() * 0.001;
 
         let cow = <HTMLImageElement>document.getElementById("cow");
-        cow.style.maxWidth = "400px";
-        let scale = (Math.sin(4 * Date.now() / 1000) * 0.1 + 1);
-        let angle = (Math.sin(1 * Date.now() / 1000) * 10);
+        // cow.style.maxWidth = "400px";
+        let scale = (Math.sin(4 * time) * 0.1 + 1);
+        let angle = (Math.sin(1 * time) * 10);
         
-        if (cow.matches(":hover")) {
-            angle += Date.now() * 0.1;
-        }
-        cow.style.transform = "rotate(" + angle + "deg) scale(" + scale + ")";
+        // if (cow.matches(":hover")) {
+        //     angle += Date.now() * 0.1;
+        // }
+        // cow.style.transform = "rotate(" + angle + "deg) scale(" + scale + ")";
 
         let title = document.getElementById("title");
         if (time - this.lastBlinkTime > 0.5) {
