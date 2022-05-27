@@ -158,7 +158,7 @@ class Application {
                 this.ancientText = this.ancientText.substring(this.numCharactersPerUpdate);
         
                 this.rulesDiv.appendChild(d2);
-                }
+            }
         
 
                 // document.body.scrollTop = 10000;
@@ -168,7 +168,7 @@ class Application {
                     
             document.body.style.backgroundColor = "rgb(" + (Math.random() * 256) + "," + (Math.random() * 256) + "," + (Math.random() * 256) + ")";
     
-            document.body.scrollTop += (Math.random() - 0.45) * 15;// * (this.rulesDiv.clientHeight + document.body.clientHeight);
+            document.body.style.paddingTop = (Math.random()) * 15 + "px";// * (this.rulesDiv.clientHeight + document.body.clientHeight);
         }
 
         let time = Date.now() * 0.001;
