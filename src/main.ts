@@ -16,6 +16,37 @@ class Application {
 
     private cowScale = 1;
 
+    readonly moo_gameName = "<p style='display: inline;'><b>Moo</b></p>";
+    readonly moo_concept = "<p style='display: inline;'><i>moo</i></p>";
+    readonly moo_moove = "<p style='display: inline; color: #8ac926'>moo</p>";
+
+    private setupText = "The game of " + this.moo_gameName + " is a gentleperson's game, played only by gentlepeople. " + 
+                        "By agreeing to play, you take on the burden of gentlepersonhood: be honest and generous, and play for fun above all else. " +
+                        "<br>In the game of " + this.moo_gameName + ", there is an imaginary " + this.moo_concept + " that moves around the circle of players. " + 
+                        "You can pass the " + this.moo_concept + " using different mooves to send it different distances in different directions. " + 
+                        "<br>To play, all players should sit in a loose circle, where it's clear who is to the left and right of who. ";
+
+    private playingTheGame = "As this is a gentlepersons's game, play cannot be started unless a player is invited to start by a fellow player. " + 
+                        "The first player must use the " + this.moo_moove + " moove to begin play. " +
+                        "From there, players utilise the mooves listed below to pass the " + this.moo_concept + " around the circle until a violation is committed. " +
+                        "<br>Upon spotting a violation, any and all players may accuse the offending player of that specific violation (bear in mind the standards of gentlepersonhood). " +
+                        "If players agree a violation was committed, the offending player is awarded a point (points are bad), and a new round is started by inviting a player to start. " + 
+                        "<br>Whenever one player reaches 5 points, the game ends and the player(s) with the fewest points wins. " + 
+                        this.moo_gameName + " may be won by more than one player, however tie-breaker rules are included below for the benefit of hyper-competitive gentlepeople.";
+
+    private rules: string[][] = [
+        ["Moo", "Passes the moo one"],
+    ];
+
+
+    private violations: string[][] = [
+        ["Hesitation", "A player hesitates for an unreasonable amount of time."],
+        ["Acting out of Sequence", "A player makes a moove when it is not their turn to do so."],
+        ["Fictional Moove", "A player uses a moove that doesn't exist."],
+        ["Mismatching", "A player's hand gesture does not match the moove named."],
+        ["Illegal Moove", "Certain mooves are banned or enforced at certain times; explained within their rule text."],
+    ];
+
     private ancientText: string = "The Moo is sick bruh. It is your job to rescue the sacred Moo for the future generations of players. A small fee of 22BTC is required to unlock this quest. "+
                                     "If you live at the poor store and are not able to afford this transaction, we may accept a deposit of one medium egg instead. You must hurry, for the mother moo is already dwindling!";// Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
                                     // "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed tortor id elit lacinia facilisis. Sed volutpat elit a molestie maximus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris eget leo sapien. Nam risus lorem, sodales in viverra ut, faucibus ac ante. Curabitur at lacus dignissim, facilisis odio ut, molestie lectus. Nullam pharetra lorem ac nibh finibus luctus ut ut arcu. Phasellus vitae varius erat. Nulla sit amet efficitur justo."+
@@ -30,6 +61,19 @@ class Application {
         // this.rulesDiv.style.display = "";
 
         this.seizureMode = this.getParam("seizureMode") != undefined;
+
+        document.getElementById("introContent").innerHTML = this.setupText;
+        document.getElementById("playingTheGameContent").innerHTML = this.playingTheGame;
+
+        let violationContent = document.getElementById("violationsContent");
+        let violationTemplate = document.getElementById("violationTemplate");
+        for (let violation of this.violations) {
+            let newViolation = <HTMLElement>violationTemplate.cloneNode(true);
+            newViolation.style.display = "";
+            newViolation.getElementsByTagName("td")[0].innerHTML = "<b>" + violation[0] + "</b>";
+            newViolation.getElementsByTagName("td")[1].innerHTML = violation[1];
+            violationTemplate.parentNode.appendChild(newViolation);
+        }
 
         window.requestAnimationFrame(() => this.updateRulesText());
 
@@ -70,51 +114,58 @@ class Application {
 
         setInterval(changeWord, 10000);
 
-        let cow = <HTMLObjectElement>document.getElementById("cow");
-        // cow.addEventListener("click", () => {
+        // let cow = <HTMLObjectElement>document.getElementById("cow");
+        // // cow.addEventListener("click", () => {
 
-        let clickTime = 0;
-        document.getElementById("cowClickBox").addEventListener("mousedown", () => {
-            cow.data = "iconhyp.svg";
+        // let clickTime = 0;
+        // document.getElementById("cowClickBox").addEventListener("mousedown", () => {
+        //     cow.data = "iconhyp.svg";
 
-            cow.onload = () => {
-                // let eye = <SVGGraphicsElement><any>cow.contentDocument.getElementById("Eye");
+        //     cow.onload = () => {
+        //         // let eye = <SVGGraphicsElement><any>cow.contentDocument.getElementById("Eye");
 
-                // let b = eye.getBBox();
+        //         // let b = eye.getBBox();
 
-                // let rotateX = b.x + b.width * 0.5;
-                // let rotateY = b.y + b.height * 0.5;
+        //         // let rotateX = b.x + b.width * 0.5;
+        //         // let rotateY = b.y + b.height * 0.5;
 
-                // let t = cow.contentDocument.getElementById("Eye2");
-                // console.log(t);
+        //         // let t = cow.contentDocument.getElementById("Eye2");
+        //         // console.log(t);
 
-                // setInterval(() => t.setAttribute("transform", "rotate(" + ((Date.now() * 0.1) % 360) + "," + rotateX + "," + rotateY + ")"), 16);
+        //         // setInterval(() => t.setAttribute("transform", "rotate(" + ((Date.now() * 0.1) % 360) + "," + rotateX + "," + rotateY + ")"), 16);
 
-                clickTime = Date.now() * 0.001;
+        //         clickTime = Date.now() * 0.001;
 
-                setInterval(() => {
-                    let angle = (Date.now() * 0.1) % 360;
-                    this.rotateSVGElementAboutCenter("EyeL", angle);
-                    angle *= -2;
-                    this.rotateSVGElementAboutCenter("EyeR", angle);
+        //         setInterval(() => {
+        //             let angle = (Date.now() * 0.1) % 360;
+        //             this.rotateSVGElementAboutCenter("EyeL", angle);
+        //             angle *= -2;
+        //             this.rotateSVGElementAboutCenter("EyeR", angle);
 
-                    let time = Date.now() * 0.001;
-                    let timeSinceClick = time - clickTime;
+        //             let time = Date.now() * 0.001;
+        //             let timeSinceClick = time - clickTime;
 
-                    if (timeSinceClick > Math.PI / 2) {
-                        timeSinceClick = Math.PI / 2;
-                    }
-                    this.cowScale = 1 + 3 * Math.sin(timeSinceClick);
-                    // cow.style.transform = "scale(" + scale + ")";
-                }, 16);
-                // setInterval(() => this.rotateSVGElementAboutCenter("EyeR", angle), 16);
-            }
+        //             if (timeSinceClick > Math.PI / 2) {
+        //                 timeSinceClick = Math.PI / 2;
+        //             }
+        //             this.cowScale = 1 + 3 * Math.sin(timeSinceClick);
+        //             // cow.style.transform = "scale(" + scale + ")";
+        //         }, 16);
+        //         // setInterval(() => this.rotateSVGElementAboutCenter("EyeR", angle), 16);
+        //     }
 
-        });
+        // });
 
         if (this.seizureMode) {
             document.body.style.background = "unset";
         }
+
+        setTimeout(() => {
+            document.getElementById("loader").style.opacity = "0";
+            setTimeout(() => {
+                document.getElementById("loader").style.display = "none";
+            }, 1500);
+        }, 500);
     }
 
     rotateSVGElementAboutCenter(nameOfElement: string, angle: number) {
@@ -173,15 +224,15 @@ class Application {
 
         let time = Date.now() * 0.001;
 
-        let cow = <HTMLImageElement>document.getElementById("cow");
-        // cow.style.maxWidth = "400px";
-        let scale = (Math.sin(4 * time) * 0.1 + 1);
-        let angle = (Math.sin(1 * time) * 10);
+        // let cow = <HTMLImageElement>document.getElementById("cow");
+        // // cow.style.maxWidth = "400px";
+        // let scale = (Math.sin(4 * time) * 0.1 + 1);
+        // let angle = (Math.sin(1 * time) * 10);
         
-        // if (cow.matches(":hover")) {
-        //     angle += Date.now() * 0.1;
-        // }
-        cow.style.transform = "rotate(" + angle + "deg) scale(" + scale * this.cowScale + ")";
+        // // if (cow.matches(":hover")) {
+        // //     angle += Date.now() * 0.1;
+        // // }
+        // cow.style.transform = "rotate(" + angle + "deg) scale(" + scale * this.cowScale + ")";
 
         let title = document.getElementById("title");
         if (time - this.lastBlinkTime > 0.5) {

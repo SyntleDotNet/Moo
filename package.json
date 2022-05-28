@@ -4,8 +4,10 @@
     "description": "A digitized version of the ancient scrolls for the game of Moo.",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "webpack-dev-server",
-        "build": "webpack --mode=production"
+        "start": "npm run dev",
+        "dev": "webpack-dev-server",
+        "build": "webpack --mode=production",
+        "deploy": "npm run build & deploy.cmd"
     },
     "repository": {},
     "keywords": [],

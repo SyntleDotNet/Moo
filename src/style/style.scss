@@ -2,6 +2,11 @@
  * COPYRIGHT 2022 Phil Bladen www.philbladen.co.uk
  */
 
+@import "./cow.scss";
+
+// Theme colours:
+$colBackground: #1e1e1e;
+
 html,
 body {
     width: 100%;
@@ -109,6 +114,12 @@ section {
         max-width: 90%;
         // background-color: red;
     }
+
+    .sideGlyphs {
+        // content: "";
+        // display: none;
+        font-size: 0.3em;
+    }
 }
 
 .cursor {
@@ -117,5 +128,59 @@ section {
         content: "|";
         // transform: translate(0, -10px);
         transform: scale(0.5, 1.2);
+    }
+}
+
+.title {
+
+}
+
+.subsection {
+    font-size: 0.5em;
+    margin-bottom: 0.3em;
+}
+
+.subsectionContent {
+    font-family: Montserrat;
+    font-size: 0.25em;
+    text-align: justify;
+
+    & br {
+        content: " ";
+        display: block;
+        margin-bottom: 1em;
+    }
+}
+
+#violationsContent {
+    font-family: Montserrat;
+    font-size: 0.25em;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#violationTemplate {
+    & th,td {
+        padding-bottom: 10px;
+        border: 5px $colBackground solid;
+        
+    }
+}
+
+.loaderIcon {
+    max-width: 30%;
+    animation: loader 1s infinite;
+}
+
+@keyframes loader {
+    0% {
+        transform: scale(0.3) rotate(-180deg);
+    }
+    50% {
+        transform: scale(1.0) rotate(0deg);
+    }
+    100% {
+        transform: scale(0.3) rotate(180deg);
     }
 }
