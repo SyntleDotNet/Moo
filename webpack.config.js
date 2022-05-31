@@ -12,7 +12,7 @@ let config = {
     },
     devServer: {
         https: false,
-        port: 8080,
+        port: 61782,
         static: path.resolve(__dirname, "dist"),
         open: true,
         // hot: true,

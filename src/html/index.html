@@ -20,9 +20,7 @@
 </head>
 
 <body class="background" style="text-align: center; color: white; font-size: 100px;">
-    <div id="loader" style="transition: opacity 0.6s; width: 100%; height: 100vh; background-color: lightblue; position: fixed; z-index: 100; display: flex; justify-content: center; align-items: center;">
-        <!-- <div class="main">
-        </div> -->
+    <div id="loader" style="transition: opacity 0.6s; width: 100%; height: 100vh; background-color: lightblue; position: fixed; z-index: 100; display: flex; justify-content: center; align-items: center; pointer-events: none;">
         <img src="icon.svg" class="loaderIcon">
     </div>
     <main id="main">
@@ -37,21 +35,38 @@
                     <!-- <div style="display: flex; flex-direction: column;"> -->
                         <p id="title" style="position: relative; margin-top: 0.2em; margin-bottom: 50px;" class="cursor">Welcome to the Ancient Scrolls</p>
 
-                        <div id="introContent" class="subsectionContent"></div>
-                        
-                        <p class="subsection">Playing the Game</p>
-                        <div id="playingTheGameContent" class="subsectionContent"></div>
+                        <div style="padding: 20px; background-color: #fff/*#aa2c2c*/; color: #333; border-radius: 10px; user-select: none; /*box-shadow: 0 0 30px 0px #555;*/">
+                            <div id="introContent" class="subsectionContent"></div>
+                        </div>
 
-                        <p class="subsection">Mooves</p>
+                        
+                        <div style="display: flex; flex-direction: row; width: 100%; align-items: center; margin-top: 50px; margin-bottom: 10px;">
+                            <div style="height: 2px; background-color: white; flex: 1 1; margin: 50px;"></div>
+                            <p class="subsection" style="margin: 0px">Playing the Game</p>
+                            <div style="height: 2px; background-color: white; flex: 1 1; margin: 50px;"></div>
+                        </div>
+                        <div style="padding: 20px; background-color: #005f73; border-radius: 10px; user-select: none;">
+                            <div id="playingTheGameContent" class="subsectionContent"></div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: row; width: 100%; align-items: center; margin-top: 50px; margin-bottom: 10px;">
+                            <div style="height: 2px; background-color: white; flex: 1 1; margin: 50px;"></div>
+                            <p class="subsection" style="margin: 0px">Mooves</p>
+                            <div style="height: 2px; background-color: white; flex: 1 1; margin: 50px;"></div>
+                        </div>
                         <div id="moves" class="subsectionContent"></div>
 
-                        <p class="subsection" style="margin-bottom: 0px">Violations</p>
+                        <div style="display: flex; flex-direction: row; width: 100%; align-items: center; margin-top: 50px; margin-bottom: 10px;">
+                            <div style="height: 2px; background-color: white; flex: 1 1; margin: 50px;"></div>
+                            <p class="subsection" style="margin: 0px">Violations</p>
+                            <div style="height: 2px; background-color: white; flex: 1 1; margin: 50px;"></div>
+                        </div>
                         <p style="font-size: 0.2em; font-family: Montserrat; margin-top: 0px"><i>All violations should be enforced with leniency upon newer players.</i></p>
                         <div id="violationsContent">
-                            <table style="background-color: #2f3e46; padding: 10px; border-radius: 5px;">
-                                <tr id="violationTemplate" style="display: none;">
-                                    <td style="text-align: end; color: goldenrod"><b>Hesitation</b></td>
-                                    <td style="text-align: start; padding-left: 10px;">asdfasdasdasd</td>
+                            <table style="border-radius: 10px; border-spacing: 5px; overflow: hidden; border: none; border-collapse: collapse;">
+                                <tr id="violationTemplate" style="display: none; background-color: antiquewhite;">
+                                    <td style="text-align: end; color: goldenrod; white-space: nowrap;"><b>Hesitation</b></td>
+                                    <td style="text-align: start;">asdfasdasdasd</td>
                                 </tr>
                             </table>
                         </div>

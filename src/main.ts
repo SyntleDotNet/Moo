@@ -17,10 +17,10 @@ class Application {
     private cowScale = 1;
 
     readonly moo_gameName = "<p style='display: inline;'><b>Moo</b></p>";
-    readonly moo_concept = "<p style='display: inline;'><i>moo</i></p>";
+    readonly moo_concept = "<p style='display: inline;color: #c8b6ff'>moo</p>";
     readonly moo_moove = "<p style='display: inline; color: #8ac926'>moo</p>";
 
-    private setupText = "The game of " + this.moo_gameName + " is a gentleperson's game, played only by gentlepeople. " + 
+    private setupText = "The <b>Game of " + this.moo_gameName + "</b> is a gentleperson's game, played only by gentlepeople. " + 
                         "By agreeing to play, you take on the burden of gentlepersonhood: be honest and generous, and play for fun above all else. " +
                         "<br>In the game of " + this.moo_gameName + ", there is an imaginary " + this.moo_concept + " that moves around the circle of players. " + 
                         "You can pass the " + this.moo_concept + " using different mooves to send it different distances in different directions. " + 
@@ -65,15 +65,23 @@ class Application {
         document.getElementById("introContent").innerHTML = this.setupText;
         document.getElementById("playingTheGameContent").innerHTML = this.playingTheGame;
 
-        let violationContent = document.getElementById("violationsContent");
+        let toggle = false;
         let violationTemplate = document.getElementById("violationTemplate");
         for (let violation of this.violations) {
             let newViolation = <HTMLElement>violationTemplate.cloneNode(true);
             newViolation.style.display = "";
+            if (toggle) {
+                newViolation.style.backgroundColor = "#2a2a2a";//"#2f3e46";
+            }
+            else {
+                newViolation.style.backgroundColor = "#333";//"#354f52";
+            }
+            toggle = !toggle;
             newViolation.getElementsByTagName("td")[0].innerHTML = "<b>" + violation[0] + "</b>";
             newViolation.getElementsByTagName("td")[1].innerHTML = violation[1];
             violationTemplate.parentNode.appendChild(newViolation);
         }
+        violationTemplate.parentNode.removeChild(violationTemplate);
 
         window.requestAnimationFrame(() => this.updateRulesText());
 
@@ -161,11 +169,17 @@ class Application {
         }
 
         setTimeout(() => {
-            document.getElementById("loader").style.opacity = "0";
+            let loaderIcon = <HTMLElement> document.querySelector(".loaderIcon");
+            let loaderAnimationHandler = () => {
+                loaderIcon.removeEventListener("animationiteration", loaderAnimationHandler);
+                loaderIcon.classList.add("loaderHide");
+                document.getElementById("loader").style.opacity = "0";
+            };
+            loaderIcon.addEventListener("animationiteration", loaderAnimationHandler);
             setTimeout(() => {
                 document.getElementById("loader").style.display = "none";
             }, 1500);
-        }, 500);
+        }, 2000);
     }
 
     rotateSVGElementAboutCenter(nameOfElement: string, angle: number) {
