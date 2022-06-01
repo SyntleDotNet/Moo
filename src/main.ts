@@ -20,11 +20,22 @@ class Application {
     readonly moo_concept = "<p style='display: inline;color: #c8b6ff'>moo</p>";
     readonly moo_moove = "<p style='display: inline; color: #8ac926'>moo</p>";
 
-    private setupText = "The <b>Game of " + this.moo_gameName + "</b> is a gentleperson's game, played only by gentlepeople. " + 
-                        "By agreeing to play, you take on the burden of gentlepersonhood: be honest and generous, and play for fun above all else. " +
-                        "<br>In the game of " + this.moo_gameName + ", there is an imaginary " + this.moo_concept + " that moves around the circle of players. " + 
-                        "You can pass the " + this.moo_concept + " using different mooves to send it different distances in different directions. " + 
-                        "<br>To play, all players should sit in a loose circle, where it's clear who is to the left and right of who. ";
+
+    private introText: string[][] = [
+        ["The Game of Moo", "<br>The <b>Game of " + this.moo_gameName + "</b> is a gentleperson's game, played only by gentlepeople. " +
+            "By agreeing to play, you take on the burden of gentlepersonhood: be honest and generous, and play for fun above all else. "],
+        ["The Concept", "<br>In the game of " + this.moo_gameName + ", there is an imaginary " + this.moo_concept + " that moves around the circle of players. " +
+            "You can pass the " + this.moo_concept + " using different mooves to send it different distances in different directions. "],
+        ["The Setup", "<br>To play, all players should sit in a loose circle, where it's clear who is to the left and right of who. As this is a gentlepersons's game, play cannot be started unless a player is invited to start by a fellow player. "],
+        ["The Game", "<br>The first player must use the " + this.moo_moove + " moove to begin play. " +
+            "From there, players utilise the mooves listed below to pass the " + this.moo_concept + " around the circle until a violation is committed. "],
+        ["The Points",  "<br>Upon spotting a violation, any and all players may accuse the offending player of that specific violation (bear in mind the standards of gentlepersonhood). " +
+        "If players agree a violation was committed, the offending player is awarded a point (points are bad), and a new round is started by inviting a player to start. "],
+        ["The End",  "<br>Whenever one player reaches 5 points, the game ends and the player(s) with the fewest points wins. " + 
+        this.moo_gameName + " may be won by more than one player, however tie-breaker rules are included below for the benefit of hyper-competitive gentlepeople."],
+    ];
+
+    private concept = "<br>To play, all players should sit in a loose circle, where it's clear who is to the left and right of who. ";
 
     private playingTheGame = "As this is a gentlepersons's game, play cannot be started unless a player is invited to start by a fellow player. " + 
                         "The first player must use the " + this.moo_moove + " moove to begin play. " +
@@ -62,7 +73,32 @@ class Application {
 
         this.seizureMode = this.getParam("seizureMode") != undefined;
 
-        document.getElementById("introContent").innerHTML = this.setupText;
+        let currentIntroText = 0;
+        document.getElementById("introTitle").innerHTML = this.introText[0][0];
+        document.getElementById("introContent").innerHTML = this.introText[0][1];
+        let introNextButton = <HTMLObjectElement>document.getElementById("introNext");
+        let introPreviousButton = <HTMLObjectElement>document.getElementById("introPrevious");
+        introNextButton.addEventListener("click", () => {
+            currentIntroText++;
+            currentIntroText = Math.min(currentIntroText, this.introText.length - 1)
+            document.getElementById("introTitle").innerHTML = this.introText[currentIntroText][0];
+            document.getElementById("introContent").innerHTML = this.introText[currentIntroText][1];
+            document.getElementById("introTitle").classList.add("text-accent");
+            document.getElementById("introContent").classList.add("text-white");
+            introNextButton.classList.add("text-accent");
+            introPreviousButton.classList.add("text-accent");
+            document.getElementById("transition-splash").classList.add("intro-transition-shape-transitioning");
+            document.getElementById("transition-splash-wrap").classList.add("intro-transition-wrap-transitioning");
+            document.getElementById("transition-splash-bg").classList.add("transition-splash-bg-transitioning");
+        });
+        introPreviousButton.addEventListener("click", () => {
+            currentIntroText--;
+            currentIntroText = Math.max(currentIntroText, 0)
+            document.getElementById("introTitle").innerHTML = this.introText[currentIntroText][0];
+            document.getElementById("introContent").innerHTML = this.introText[currentIntroText][1];
+        });
+
+
         document.getElementById("playingTheGameContent").innerHTML = this.playingTheGame;
 
         let toggle = false;
@@ -120,7 +156,7 @@ class Application {
             setTimeout(removeChar, 50);
         };
 
-        setInterval(changeWord, 10000);
+        // setInterval(changeWord, 10000);
 
         // let cow = <HTMLObjectElement>document.getElementById("cow");
         // // cow.addEventListener("click", () => {
@@ -168,18 +204,31 @@ class Application {
             document.body.style.background = "unset";
         }
 
+        let updateWindowSize = () => {
+            // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+            let vh = window.innerHeight * 0.01;
+            // Then we set the value in the --vh custom property to the root of the document
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        // if (typeof screen.orientation == 'undefined') { // If not mobile
+            window.addEventListener("resize", updateWindowSize); // Leave in for debug
+        // }
+        updateWindowSize();
+
         setTimeout(() => {
-            let loaderIcon = <HTMLElement> document.querySelector(".loaderIcon");
-            let loaderAnimationHandler = () => {
-                loaderIcon.removeEventListener("animationiteration", loaderAnimationHandler);
-                loaderIcon.classList.add("loaderHide");
-                document.getElementById("loader").style.opacity = "0";
-            };
-            loaderIcon.addEventListener("animationiteration", loaderAnimationHandler);
-            setTimeout(() => {
-                document.getElementById("loader").style.display = "none";
-            }, 1500);
-        }, 2000);
+            // let loaderIcon = <HTMLElement> document.querySelector(".loaderIcon");
+            // let loaderAnimationHandler = () => {
+            //     loaderIcon.removeEventListener("animationiteration", loaderAnimationHandler);
+            //     loaderIcon.classList.add("loaderHide");
+            // };
+            // loaderIcon.addEventListener("animationiteration", loaderAnimationHandler);
+            
+            let loader = document.getElementById("loader");
+            loader.addEventListener("transitionend", () => {
+                loader.style.display = "none";
+            });
+            loader.style.opacity = "0";
+        }, 0);
     }
 
     rotateSVGElementAboutCenter(nameOfElement: string, angle: number) {

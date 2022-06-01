@@ -8,6 +8,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="google" content="notranslate">
+
+    <meta name="theme-color" content="#1b1a27">
     
     <link rel="stylesheet" href="main.css">
 
@@ -16,30 +18,88 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Macondo&family=Noto+Sans+Old+Persian&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@1,700&family=Montserrat&family=Macondo&family=Noto+Sans+Old+Persian&family=Epilogue:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body class="background" style="text-align: center; color: white; font-size: 100px;">
-    <div id="loader" style="transition: opacity 0.6s; width: 100%; height: 100vh; background-color: lightblue; position: fixed; z-index: 100; display: flex; justify-content: center; align-items: center; pointer-events: none;">
-        <img src="icon.svg" class="loaderIcon">
+    <div id="loader" style="transition: opacity 1s; width: 100%; height: 100vh; position: fixed; z-index: 100; display: flex; justify-content: center; align-items: center; pointer-events: none;">
+        <!-- <img src="icon.svg" class="loaderIcon"> -->
     </div>
-    <main id="main">
-        <section>
+    <main id="main" style="position: relative">
+        <div id="titlebackground" style="box-shadow: 0px 0px 50px #666; z-index: -2;"></div>
+        <div id="introbackground" style="z-index: -3"></div>
+        <!-- <section>
           <div class="sideGlyphs side">𐎹𐎫𐎼𐏐𐎩𐎥𐎡𐏐𐏁𐎠𐎫𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎡𐏐𐏁𐎠𐎫𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎹𐎫𐎼𐏐𐎩𐎥𐎡𐏐𐏁𐎠𐎫𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎡𐏐𐏁𐎠𐎫𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹</div>
-        </section>
-      
+        </section> -->
+        
         <section class="limiter">
             <!-- <div> -->
                 <div class="content" style="flex: 1 1; display: flex; flex-direction: column; align-items: center;">
                     
-                    <!-- <div style="display: flex; flex-direction: column;"> -->
-                        <p id="title" style="position: relative; margin-top: 0.2em; margin-bottom: 50px;" class="cursor">Welcome to the Ancient Scrolls</p>
+                    <!-- <div style="display: flex; flex-direction: column;"> -->   
 
-                        <div style="padding: 20px; background-color: #fff/*#aa2c2c*/; color: #333; border-radius: 10px; user-select: none; /*box-shadow: 0 0 30px 0px #555;*/">
-                            <div id="introContent" class="subsectionContent"></div>
+
+                        <!-- Title block: -->
+                        <div style="min-height: 100vh; min-height: calc(var(--vh, 1vh) * 100); display: flex; flex-direction: column;">
+                            <div style="flex: 3 3;">
+                                <div style="font-family: Roboto Condensed; font-size: small;">
+                                    <br /><br />
+                                    Don't you get it, Brian? I am VGHS.
+                                </div>
+                            </div>
+                         
+                            <div id="title" style="position: relative;" class="cursor">
+                               Welcome, to 
+                               <svg id="mootext" height="1.5em" viewBox="0 0 308 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/">
+                                   <g transform="matrix(1,0,0,1,-191.334,-702.833)">
+                                       <path d="M214,707C210.644,708.678 185.995,783.542 199.525,779.575C209.115,776.764 236.893,697.618 252,712C265.376,724.734 235,770 235,770C235,770 279.958,730.204 280.283,735.16C280.452,737.734 265.026,767.294 284,768C302.445,768.687 325.277,742.952 331,737C336.723,731.048 348.603,714.672 357.728,713.268C366.853,711.864 374,715 374,715C374,715 347.339,702.054 337,737C329.77,761.437 339.697,766.76 345,767C356.55,767.523 361.495,752.077 361.601,743C361.708,733.923 359,727 359,727C359,727 360.986,733.625 386,733C411.014,732.375 417.279,730.728 417.279,730.728C422.3,716.034 437.397,709.562 453,715C453,715 427.333,705.123 416,735C407.079,758.517 416.234,766.212 422,767C433.615,768.588 439.416,751.993 440.774,744.245C443.119,730.858 438,728 438,728C438,728 445.049,735.412 466.981,734.34C487.025,733.36 495,730 495,730"/>
+                                   </g>
+                               </svg>
+                            </div>
+
+                            <div style="flex: 4 4; position: relative; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 2.5vh;">
+                                <svg id="titleArrow" height="40%" viewBox="0 0 48 126" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+                                    <path d="M21.755,1.042C6.911,10.459 -5.235,35.705 4.595,54.934C20.334,85.719 52.996,60.101 44.086,41.486C31.271,14.709 -14.095,42.179 11.093,83.336C16.997,92.982 18.682,94.192 20.663,108.006"/>
+                                    <path d="M16.868,112.873C16.763,112.61 16.792,112.312 16.947,112.074C17.101,111.837 17.362,111.69 17.645,111.68C19.359,111.62 22.442,111.511 24.193,111.449C24.484,111.439 24.761,111.575 24.93,111.812C25.1,112.049 25.14,112.354 25.037,112.627C24.274,114.64 22.745,118.675 21.808,121.147C21.681,121.482 21.361,121.705 21.003,121.709C20.644,121.712 20.32,121.495 20.187,121.162C19.216,118.737 17.642,114.806 16.868,112.873Z"/>
+                                </svg>
+                            </div>
+                            
+                            
                         </div>
 
-                        
+                        <!-- Intro block -->
+
+                        <div id="transition-splash-wrap" class="intro-transition-wrap" style="min-width: 100vw;">
+                            <div id="transition-splash-bg" ></div>
+                            <svg id="transition-splash" class="intro-transition-shape"  width="100%" height="10vh" preserveAspectRatio="none" viewBox="0 0 1440 800">
+                              <path 
+                                d="M -30.45,-43.86 -30.45,0 53.8,0 53.8,0 179.5,0 179.5,0 193.3,0 193.3,0 253.1,0 253.1,0 276.1,0 276.1,0 320.6,0 320.6,0 406.5,0 406.5,0 435.6,0 435.6,0 477,0 477,0 527.6,0 527.6,0 553.7,0 553.7,0 592,0 592,0 742.3,0 742.3,0 762.2,0 762.2,0 776,0 776,0 791.3,0 791.3,0 852.7,0 852.7,0 871.1,0 871.1,0 878.7,0 878.7,0 891,0 891,0 923.2,0 923.2,0 940.1,0 940.1,0 976.9,0 976.9,0 1031,0 1031,0 1041,0 1041,0 1176,0 1176,0 1192,0 1192,0 1210,0 1210,0 1225,0 1225,0 1236,0 1236,0 1248,0 1248,0 1273,0 1273,0 1291,0 1291,0 1316,0 1316,0 1337,0 1337,0 1356,0 1356,0 1414,0 1414,0 1432,0 1432,0 1486,0 1486,-43.86 Z" 
+                                pathdata:id="M -30.45,-57.86 -30.45,442.6 53.8,443.8 53.8,396.3 179.5,396.3 179.5,654.7 193.3,654.7 193.3,589.1 253.1,589.1 253.1,561.6 276.1,561.6 276.1,531.2 320.6,531.2 320.6,238.6 406.5,238.6 406.5,213.9 435.6,213.9 435.6,246.2 477,246.2 477,289.9 527.6,289.9 527.6,263.3 553.7,263.3 553.7,280.4 592,280.4 592,189.2 742.3,189.2 742.3,259.5 762.2,259.5 762.2,103.7 776,103.7 776,77.11 791.3,77.11 791.3,18.21 852.7,18.21 852.7,86.61 871.1,86.61 871.1,231 878.7,240.5 878.7,320.3 891,320.3 891,434.3 923.2,434.3 923.2,145.5 940.1,145.5 940.1,117 976.9,117 976.9,139.8 1031,139.8 1031,284.2 1041,284.2 1041,242.4 1176,242.4 1176,282.3 1192,282.3 1192,641.4 1210,641.4 1210,692.7 1225,692.7 1225,599.6 1236,599.6 1236,527.4 1248,527.4 1248,500.8 1273,500.8 1273,523.6 1291,523.6 1291,652.8 1316,652.8 1316,533.1 1337,533.1 1337,502.7 1356,502.7 1356,523.6 1414,523.6 1414,491.3 1432,491.3 1432,523.6 1486,523.6 1486,-57.86 Z"
+                              ></path>
+                            </svg>
+                        </div>
+
+                        <div style="display: flex; min-height: 100%; flex-direction: row; min-width: 100vw; ">
+                            <div id="introPrevious" class="introArrows">
+                                <svg width="100%" height="100%" viewBox="0 0 62 103" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+                                    <path d="M51.49,10.417C51.49,10.417 26.433,35.473 15.461,46.445C12.675,49.231 12.675,53.748 15.461,56.534C26.433,67.506 51.49,92.563 51.49,92.563" />
+                                </svg>
+                            </div>
+                            <div style="flex: 1 1 50%; display: flex; justify-content: center; flex-direction: column; padding: 20px; color: #333; user-select: none; /*box-shadow: 0 0 30px 0px #555;*/">
+                                <div style="flex: 3 3;"></div>
+                                <div id="introTitle" style="flex: 2 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; font-weight: 100;" class="subsectionTitle">The Game of Moo</div>
+                                <div id="introContent" style="flex: 2 2;" class="subsectionContent"></div>
+                                <div style="flex: 3 3;"></div>
+                            </div>
+                            <div id="introNext" class="introArrows">
+                                <svg width="100%" height="100%" viewBox="0 0 62 103" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;transform: rotate(180deg)">
+                                    <path d="M51.49,10.417C51.49,10.417 26.433,35.473 15.461,46.445C12.675,49.231 12.675,53.748 15.461,56.534C26.433,67.506 51.49,92.563 51.49,92.563" />
+                                </svg>
+                            </div>
+                        </div>
+
+
+                        <!-- Playing the Game -->
                         <div style="display: flex; flex-direction: row; width: 100%; align-items: center; margin-top: 50px; margin-bottom: 10px;">
                             <div style="height: 2px; background-color: white; flex: 1 1; margin: 50px;"></div>
                             <p class="subsection" style="margin: 0px">Playing the Game</p>
@@ -71,12 +131,12 @@
                             </table>
                         </div>
 
-                        <!-- <div id="cowClickBox" style="width: 400px; max-width: 400px; min-height: 400px; max-height: 400px; overflow: visible; cursor: pointer; z-index: 10;">
+                        <div id="cowClickBox" style="width: 400px; max-width: 400px; min-height: 400px; max-height: 400px; overflow: visible; cursor: pointer; z-index: 10;">
                             <object id="cow" data="icon.svg" style="pointer-events: none;"></object>
                         </div>
                         <img src="Cowpat.gif" style="max-width: 300px">
                         <img src="Moo.gif">
-                        <img src="NiceMan.gif"> -->
+                        <img src="NiceMan.gif">
                     
                         <p id="rules" style="font-size: 30px; display: flex; flex-direction: row; align-items: center; max-width: 100%; flex-wrap: wrap;"></p>
                     <!-- </div> -->
@@ -84,9 +144,9 @@
             <!-- </div> -->
         </section>
       
-        <section>
+        <!-- <section>
           <div class="sideGlyphs side">𐎹𐎫𐎼𐏐𐎩𐎥𐎡𐏐𐏁𐎠𐎫𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎡𐏐𐏁𐎠𐎫𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎹𐎫𐎼𐏐𐎩𐎥𐎡𐏐𐏁𐎠𐎫𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎡𐏐𐏁𐎠𐎫𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹𐎠𐎹𐎫𐎼𐏐𐎩𐎥𐎫𐎡𐏐𐏁𐎠𐎴𐎫𐎡𐎴𐎹</div>
-        </section>
+        </section> -->
       </main>
 
 
