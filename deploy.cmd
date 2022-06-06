@@ -1,2 +1,5 @@
+set remotehost=philbladen.co.uk
+set remotepath=/var/www/vhosts/moorules.com/httpdocs/
+ssh %remotehost% "rm -r %remotepath%*"
 cd dist
-scp -r ./* "philbladen.co.uk:/var/www/vhosts/philbladen.co.uk/httpdocs/projects/moo/"
+scp -r ./* "%remotehost%:%remotepath%"
