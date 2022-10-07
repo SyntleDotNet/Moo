@@ -15,7 +15,6 @@ let config = {
         port: 61782,
         static: path.resolve(__dirname, "dist"),
         open: true,
-        // hot: true,
         watchFiles: ['src/**/*'],
     },
     module: {
@@ -29,10 +28,6 @@ let config = {
                 test: /\.s[ac]ss$/i,
                 use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
-            // {
-            //     test: /\.html$/,
-            //     loader: "html-loader",
-            // },
         ],
     },
     plugins: [
@@ -45,12 +40,9 @@ let config = {
             patterns: [
                 { from: "src/html", to: "" },
                 { from: "resources/output", to: "" },
+                { from: "manifest.webmanifest", to: "" },
             ],
         }),
-        // new HtmlWebPackPlugin({
-        //     template: "./src/html/index.html",
-        //     filename: "./index.html",
-        // }),
     ],
     resolve: {
         extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],

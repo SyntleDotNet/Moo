@@ -2,16 +2,12 @@
  * COPYRIGHT 2022 Phil Bladen www.philbladen.co.uk
  */
 
-// Theme colours: https://coolors.co/palette/ee6055-60d394-aaf683-ffd97d-ff9b85
-$colBackground: #1b1a27;
-$accentColor: #ee6055;
-$accentColor2: #1b1a27; //#af7cda;
-$colContentBackground: #ffffff;
+@import "./theme.scss";
+@import "./animations.scss";
 
 html,
 body {
     width: 100%;
-    height: 100%;
     margin: 0;
     padding: 0;
 
@@ -30,6 +26,16 @@ body {
     scroll-behavior: smooth;
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
 .background {
     // background: radial-gradient(
     //     ellipse farthest-corner at center bottom,
@@ -37,6 +43,8 @@ body {
     //     #f72585 100%
     // )
     // center bottom / 100% fixed;
+
+    font-size: 100px;
 
     background: linear-gradient(
             to bottom,
@@ -47,22 +55,12 @@ body {
         center bottom / 100% fixed;
 }
 
-.sideGlyphs {
-    text-align: start;
-    writing-mode: vertical-rl;
-    white-space: nowrap;
-    font-size: 0.5em;
-    font-family: "Noto Sans Old Persian", sans-serif;
-    color: #333;
-    user-select: none;
-}
-
 main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     // font-size: 12px;
     width: 100%;
-    max-width: 100%;
+    // max-width: 100%;
     justify-content: space-between;
 
     // overflow: hidden;
@@ -70,85 +68,30 @@ main {
     min-height: 100vh;
 }
 
-section {
-    display: flex;
-    flex-direction: column;
-
-    // & >
-}
-
 #titlebackground {
     background-color: $colBackground;
-    position: absolute;
-    top: 0px;
-    height: 100vh;
+    
+    height: 100%;
     width: 100%;
     z-index: -1;
 }
 
 #introbackground {
     background-color: $colContentBackground;
-    position: absolute;
-    top: 100vh;
-    height: 100vh;
+    // position: absolute;
+    // top: 100vh;
+    height: 100%;
     width: 100%;
+
     z-index: -1;
 }
 
-.side {
-    flex: 0px 1 0;
-    // flex-grow: 1;
-    overflow: hidden;
-}
-
-.limiter {
-    flex: 1 1;
-
-    display: flex;
-    flex-direction: row;
-    // align-items: center;
-    justify-content: center;
-
-    & > div {
-        // display: flex;
-        // justify-content: center;
-    }
-}
-
 .content {
-    max-width: 50%; // Was 50 !!!
-}
-
-@media screen and (max-width: 2000px) {
-    .content {
-        max-width: 80%;
-        // background-color: red;
-    }
-}
-@media screen and (max-width: 1000px) {
-    .content {
-        max-width: 100%; //!!! was 90
-        // background-color: red;
-    }
-
-    .sideGlyphs {
-        // content: "";
-        // display: none;
-        font-size: 0.3em;
-    }
-}
-
-.cursor {
-    // &::after {
-    //     position: absolute;
-    //     content: "|";
-    //     // transform: translate(0, -10px);
-    //     transform: scale(0.5, 1.2);
-    // }
+    max-width: 100%; // Was 50 !!!
 }
 
 #title {
-    user-select: none;
+    // user-select: none;
     font-family: "Roboto Condensed", sans-serif;
     font-style: normal;
     // font-weight: 800;
@@ -161,6 +104,7 @@ section {
     stroke-linejoin: round;
     stroke-miterlimit: 1.5;
     margin-bottom: -0.4em;
+    padding-top: 0.4em;
     & path {
         fill: none;
         //stroke: rgb(248, 79, 57);
@@ -172,12 +116,6 @@ section {
         stroke-dasharray: 1000;
         stroke-dashoffset: 1000;
         animation: firstAnimation 2s linear forwards;
-    }
-}
-
-@keyframes firstAnimation {
-    to {
-        stroke-dashoffset: 0;
     }
 }
 
@@ -197,7 +135,7 @@ section {
 
 .subsectionTitle {
     font-size: 1.4em;
-    color: $accentColor;
+    color: $accentColor2;
 }
 
 .subsectionContent {
@@ -228,12 +166,12 @@ section {
 
     & path {
         fill: none;
-        stroke: $accentColor;
+        stroke: $accentColor2;
         stroke-width: 15px;
         // color: $accentColor;
     }
     &:hover {
-        transform: scale(1.1);
+        // transform: scale(1.2);
     }
 }
 
@@ -244,7 +182,12 @@ section {
 
 .text-accent {
     animation: fadetoaccent 1s linear forwards;
-    color: $accentColor;
+    & path {
+        transition: 1s;
+        fill: none;
+        stroke: $accentColor3;
+        stroke-width: 15px;
+    }
 }
 
 #violationTemplate {
@@ -330,127 +273,54 @@ section {
 #transition-splash-bg {
     background-color: $accentColor2;
     position: absolute;
-    height: 0vh;
-    width: 100%;
+    height: 100vh;
+    width: 0vw;
     z-index: 2;
 }
 
 .transition-splash-bg-transitioning {
-    animation: growdown 1s linear forwards;
+    animation: grow-left 1s linear forwards;
 }
 
 .intro-transition-shape-transitioning path {
-    transition: 0.5s;
+    transition: .75s;
     d: path(
         "M -30.45,-57.86 -30.45,442.6 53.8,443.8 53.8,396.3 179.5,396.3 179.5,654.7 193.3,654.7 193.3,589.1 253.1,589.1 253.1,561.6 276.1,561.6 276.1,531.2 320.6,531.2 320.6,238.6 406.5,238.6 406.5,213.9 435.6,213.9 435.6,246.2 477,246.2 477,289.9 527.6,289.9 527.6,263.3 553.7,263.3 553.7,280.4 592,280.4 592,189.2 742.3,189.2 742.3,259.5 762.2,259.5 762.2,103.7 776,103.7 776,77.11 791.3,77.11 791.3,18.21 852.7,18.21 852.7,86.61 871.1,86.61 871.1,231 878.7,240.5 878.7,320.3 891,320.3 891,434.3 923.2,434.3 923.2,145.5 940.1,145.5 940.1,117 976.9,117 976.9,139.8 1031,139.8 1031,284.2 1041,284.2 1041,242.4 1176,242.4 1176,282.3 1192,282.3 1192,641.4 1210,641.4 1210,692.7 1225,692.7 1225,599.6 1236,599.6 1236,527.4 1248,527.4 1248,500.8 1273,500.8 1273,523.6 1291,523.6 1291,652.8 1316,652.8 1316,533.1 1337,533.1 1337,502.7 1356,502.7 1356,523.6 1414,523.6 1414,491.3 1432,491.3 1432,523.6 1486,523.6 1486,-57.86 Z"
     );
 }
 
 .intro-transition-wrap-transitioning {
-    animation: movedown 1s linear forwards;
+    animation: move-left 1s linear forwards;
 }
 
 .intro-transition-wrap {
     position: absolute;
     z-index: -1;
-    margin: -5px 0 0 0; /* Hide the gap */
+    // margin: -5px 0 0 0; /* Hide the gap */
     pointer-events: none;
     top: 100vh;
-    overflow: hidden;
+    height: 100%;
+
+    min-width: 100vw;
+
+    background-color: $colContentBackground;
+    // position: absolute;
+    // top: 100vh;
+    // height: 100vh;
+    // width: 100%;
+    // z-index: -1;
 }
 
 .intro-transition-shape {
-    height: 100vh;
+    height: 100vw;
     width: 100%;
     display: block;
     fill: $accentColor2;
 }
 
-@keyframes fadetoaccent {
-    0% {
-    }
-    50% {
-        color: white;
-    }
-    100% {
-        color: $accentColor;
-    }
+.contentBlock {
+    flex-basis: 100vh;
+    background-color: $colBackground;
 }
 
-@keyframes movedown {
-    0% {
-        padding-top: 0;
-    }
-    50% {
-        padding-top: 20vh;
-    }
-    100% {
-        padding-top: 100vh;
-    }
-}
-
-@keyframes growdown {
-    0% {
-        top: 0vh;
-        height: 0;
-    }
-    50% {
-        top: 0vh;
-        height: 20vh;
-    }
-    100% {
-        top: -0px;
-        height: 100vh;
-    }
-}
-
-@keyframes dashmove {
-    from {
-        stroke-dashoffset: 10;
-    }
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes bob {
-    0% {
-        transform: translate(0, -0.025em);
-    }
-    50% {
-        transform: translate(0, 0.025em);
-    }
-    100% {
-        transform: translate(0, -0.025em);
-    }
-}
-
-@keyframes popin {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes popout {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(0);
-    }
-}
-
-@keyframes loader {
-    0% {
-        transform: scale(1) rotate(0deg);
-    }
-    // 50% {
-    //     transform: scale(1.0) rotate(0deg);
-    // }
-    100% {
-        transform: scale(1) rotate(360deg);
-    }
-}
+@import "./responsive.scss"; // This line must be at the end of this file
