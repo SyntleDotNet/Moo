@@ -1,0 +1,77 @@
+.mootext {
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 1.5;
+    margin-bottom: -0.4em;
+    padding-top: 0.4em;
+}
+.mootext path {
+    fill: none;
+
+    stroke-width: 8.33px;
+
+    stroke: #ee6055;
+    transition: 1s;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: handwritingAnimation 2s linear forwards;
+}
+
+.titleArrow {
+    position: absolute;
+}
+
+.titleArrow path:first-of-type {
+    animation: dashmove 0.75s linear infinite;
+    fill: none;
+    stroke: #ee6055;
+    stroke-width: 2px;
+    stroke-dasharray: 5, 5, 0, 0;
+    stroke-dashoffset: 0;
+}
+.titleArrow path:not(:first-of-type) {
+    animation: bob 0.75s ease-in-out infinite;
+    animation-delay: 0.25s;
+    stroke: none;
+    fill: #ee6055;
+}
+
+@keyframes handwritingAnimation {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes dashmove {
+    from {
+        stroke-dashoffset: 10;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes bob {
+    0% {
+        transform: translate(0, -0.025em);
+    }
+    50% {
+        transform: translate(0, 0.025em);
+    }
+    100% {
+        transform: translate(0, -0.025em);
+    }
+}
+
+@keyframes slide {
+    from {
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(200px);
+    }
+}
