@@ -2,169 +2,181 @@
     {
         "name": "Moo",
         "description": "The most basic move in Moo. Passes the Moo one person to the left or right in the direction of play. This move must be made in the same direction as the Moo is currently traveling.",
-        "pack": "",
+        "pack": "basic",
         "anim_file": ""
     },
     {
         "name": "Cowpat",
         "description": "Reflects the Moo backwards, reversing the direction of play. Passes the Moo one person to the left or right of the user in the new direction of play. The move must be made using the furthest hand from the direction of play.",
-        "pack": "",
+        "pack": "basic",
         "anim_file": ""
     },
     {
         "name": "Cream Tea",
         "description": "Skips the person who would go next in the current direction of travel.",
-        "pack": "",
+        "pack": "basic",
         "anim_file": ""
     },
     {
         "name": "Manure",
         "description": "Summons magical dog",
-        "pack": "",
+        "pack": "basic",
         "anim_file": ""
     },
     {
         "name": "Gimme My Combine Harvester",
         "description": "Summons magical dog",
-        "pack": "",
+        "pack": "basic",
         "anim_file": ""
     },
     {
         "name": "Mmm Burger",
         "description": "Mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm burger",
-        "pack": "",
+        "pack": "basic",
         "anim_file": ""
     },
     {
         "name": "You're A Nice Man",
         "description": "Summons magical hah dog",
-        "pack": "",
+        "pack": "basic",
         "anim_file": ""
     },
     {
         "name": "You're Not A Nice Man",
         "description": "Jumps to that player and changes direction",
-        "pack": "",
+        "pack": "basic",
         "anim_file": ""
     },
     {
         "name": "Take The Plough",
         "description": "Summons haha a magical dog hahahahahyaha",
-        "pack": "",
+        "pack": "expansion1",
         "anim_file": ""
     },
     {
         "name": "Pitchfork",
         "description": "We all know what these do Phil",
-        "pack": "",
+        "pack": "expansion1",
         "anim_file": ""
     },
     {
         "name": "Tutenkharghhhhmoon",
-        "description": "Micah it summons a magical dog pal",
-        "pack": "",
+        "description": "Micah it summons a magical dog pal.",
+        "pack": "expansion1",
         "anim_file": ""
     },
     {
         "name": "Combovine",
         "description": "Conjoins two Moos incident on the player into a single Moo traveling to Egypt (where Hunter00 lives).",
-        "pack": "",
+        "pack": "expansion1",
         "anim_file": ""
     },
     {
         "name": "Moon",
-        "description": "Sends moo to moon",
-        "pack": "",
+        "description": "Sends moo to moon.",
+        "pack": "expansion1",
         "anim_file": ""
     },
     {
         "name": "Mooteor Shower",
-        "description": "Can only be used when 10 Moos are on the moon",
-        "pack": "",
+        "description": "Can only be used when 10 Moos are on the moon.",
+        "pack": "expansion1",
         "anim_file": ""
     },
     {
         "name": "Tractors On",
-        "description": "Does what it says on the tin",
-        "pack": "",
+        "description": "Does what it says on the tin.",
+        "pack": "expansion2",
         "anim_file": ""
     },
     {
         "name": "Tractors Off Time For Tea",
-        "description": "Same as Tractors On but off",
-        "pack": "",
+        "description": "Same as Tractors On but off.",
+        "pack": "expansion2",
         "anim_file": ""
     },
     {
         "name": "Crop Circles",
-        "description": "A crop circle, crop formation, or corn circle is a pattern created by flattening a crop, usually a cereal. The term was first coined in the early 1980s by Colin Andrews. Crop circles have been described as all falling 'within the range of the sort of thing done in hoaxes' by Taner Edis, professor of physics at Truman State University. Although obscure natural causes or alien origins of crop circles are suggested by fringe theorists, there is no scientific evidence for such explanations, and all crop circles are consistent with human causation. The number of reports of crop circles has substantially increased since the 1970s. There has been scant scientific study of them. Circles in the United Kingdom are not distributed randomly across the landscape but appear near roads, areas of medium to dense population and cultural heritage monuments, such as Stonehenge or Avebury.[8] In 1991, two hoaxers, Doug Bower and Dave Chorley, took credit for having created many circles throughout England after one of their circles was described by an investigator as impossible for human beings to make.[9] Formations are usually created overnight,[10] although some are reported to have appeared during the day. In contrast to crop circles or crop formations, archaeological remains can cause cropmarks in the fields in the shapes of circles and squares, but they do not appear overnight, and they are always in the same places every year. Nearly half of all crop circles found in the UK in 2003 were located within a 15 kilometres (9.3 mi) radius of the Avebury stone circles.",
-        "pack": "",
+        "description": "A crop circle, crop formation, or corn circle is a pattern created by flattening a crop, usually a cereal. The term was first coined in the early 1980s by Colin Andrews. Crop circles have been described as all falling 'within the range of the sort of thing done in hoaxes' by Taner Edis, professor of physics at Truman State University. Although obscure natural causes or alien origins of crop circles are suggested by fringe theorists, there is no scientific evidence for such explanations, and all crop circles are consistent with human causation. The number of reports of crop circles has substantially increased since the 1970s. There has been scant scientific study of them. Circles in the United Kingdom are not distributed randomly across the landscape but appear near roads, areas of medium to dense population and cultural heritage monuments, such as Stonehenge or Avebury. In 1991, two hoaxers, Doug Bower and Dave Chorley, took credit for having created many circles throughout England after one of their circles was described by an investigator as impossible for human beings to make. Formations are usually created overnight, although some are reported to have appeared during the day. In contrast to crop circles or crop formations, archaeological remains can cause cropmarks in the fields in the shapes of circles and squares, but they do not appear overnight, and they are always in the same places every year. Nearly half of all crop circles found in the UK in 2003 were located within a 15 kilometres (9.3 mi) radius of the Avebury stone circles.",
+        "pack": "expansion2",
         "anim_file": ""
     },
     {
         "name": "UFO Sighting",
         "description": "A UFO is sighted granting sight to all players.",
-        "pack": "",
+        "pack": "expansion2",
         "anim_file": ""
     },
     {
         "name": "Mootilated Corpse",
         "description": "Please press F to pay respects.",
-        "pack": "",
+        "pack": "expansion3",
         "anim_file": ""
     },
     {
         "name": "Pew",
-        "description": "",
-        "pack": "",
+        "description": "Say pew.",
+        "pack": "expansion3",
         "anim_file": ""
     },
     {
         "name": "Murder Moostry",
         "description": "Must be used if you know you have been \"Pew\"ed.",
-        "pack": "",
+        "pack": "expansion3",
         "anim_file": ""
     },
     {
         "name": "Retractor",
         "description": "Reverses two moves time.",
-        "pack": "",
+        "pack": "expansion3",
         "anim_file": ""
     },
     {
         "name": "Simoon Says",
         "description": "Do what Simoon says you should until the Moo lands back on Simoon.",
-        "pack": "",
+        "pack": "expansion3",
         "anim_file": ""
     },
     {
         "name": "Moot Point",
         "description": "Shhhhhhhhhh",
-        "pack": "",
+        "pack": "expansion4",
         "anim_file": ""
     },
     {
         "name": "Newt Point",
-        "description": "",
-        "pack": "",
+        "description": "Does what it says on the tin.",
+        "pack": "expansion4",
         "anim_file": ""
     },
     {
         "name": "Stir The Pot",
-        "description": "",
-        "pack": "",
+        "description": "All plough relationships are rotated one person in the direction of travel of the relevant moo.",
+        "pack": "expansion4",
         "anim_file": ""
     },
     {
         "name": "Fish",
-        "description": "",
-        "pack": "",
+        "description": "🐠",
+        "pack": "simple fish rules",
         "anim_file": ""
     },
     {
         "name": "Surf 'n' Turf",
-        "description": "Like steak and fishy",
-        "pack": "",
+        "description": "Like steak and fishy.",
+        "pack": "simple fish rules",
+        "anim_file": ""
+    },
+    {
+        "name": "Ocean Trawler",
+        "description": "The under-the-sea equivalent of Tractors On.",
+        "pack": "simple fish rules",
+        "anim_file": ""
+    },
+    {
+        "name": "All Hail The Moo King",
+        "description": "The target player becomes the new moonarch. This entails the target player placing a crown upon their head as all players say \"All hail\". From now on, all moves by players that result in the moo ending up on the moonarch must be completed with the phrase \"your majesty\".",
+        "pack": "Elizabeth II memorial pack",
         "anim_file": ""
     }
 ]

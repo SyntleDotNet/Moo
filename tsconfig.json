@@ -4,7 +4,12 @@
     "module": "esnext",
     "moduleResolution": "node",
     "baseUrl": "../",
-    "lib": ["dom", "dom.iterable", "esnext", "WebWorker"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "WebWorker"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -16,6 +21,15 @@
     "jsx": "preserve",
     "strict": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../common/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "../common/**/*.ts"
+  ]
+  // "exclude": ["node_modules"]
+  ,
+  "exclude": [
+    "node_modules"
+  ]
 }

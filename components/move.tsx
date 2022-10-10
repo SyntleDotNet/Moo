@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import { PlayIcon as PlayIconSolid } from "@heroicons/react/24/solid";
 import styles from "../src/style/index.module.css";
 
@@ -9,41 +9,52 @@ export type Move = {
     animFile: string;
 };
 
-export function Move(props: { move: Move }) {
-    const { move } = props;
-    const [open, setOpen] = useState(false);
+export function Move(props: {
+    move: Move;
+    open: boolean;
+    onClick: MouseEventHandler;
+    index: number;
+}) {
+    const { move, open, onClick, index } = props;
     const [maxHeight, setMaxHeight] = useState(0);
     const refBase = useRef(null);
     const refExpanded = useRef(null);
 
-    const colours = [
-        "text-sky-400",
-        "text-yellow-400",
-        "text-lime-400",
-        "text-red-400",
-        "text-violet-400",
-        "text-orange-400",
-    ];
+    const colours = {
+        basic: "text-sky-400",
+        expansion1: "text-yellow-400",
+        expansion2: "text-lime-400",
+        expansion3: "text-red-400",
+        expansion4: "text-violet-400",
+        "simple fish rules": "text-orange-400",
+    };
+
+    const colour = colours[move.pack];
 
     useEffect(() => {
         setMaxHeight(open ? 10 + refExpanded.current.clientHeight : 0);
-    }, [open]);
+    }, [open, move]);
     return (
-        <a
-            href="#"
-            className="transition-all duration-200 max-w-2xl bg-white hover:bg-[#37354F] hover:text-white hover:border-[rgba(0,0,0,0)] w-full text-gray-600 mb-2 rounded-lg p-4 border flex flex-col"
-            onClick={() => setOpen((o) => !o)}
-            style={{ animation: styles.slide, animationDirection: "0.5s" }}
+        <div
+            className={
+                "opacity-0 cursor-pointer transition-all duration-200 max-w-2xl bg-white sm:hover:bg-[#37354F] sm:hover:text-white sm:hover:border-[#37354F] w-full text-gray-600 mb-2 rounded-lg p-4 border flex flex-col animate-[slide_0.2s_ease-in-out_forwards]" +
+                (open ? " !bg-[#37354F] !text-white !border-[#37354F]" : "")
+            }
+            onClick={onClick}
+            style={{ animationDelay: `${index * 0.02}s` }}
         >
             <div className="flex items-center">
                 <PlayIconSolid
                     className={
                         "h-4 w-4 mr-2 transition-all " +
                         (open ? " rotate-90 " : " ") +
-                        colours[Math.floor(Math.random() * colours.length)]
+                        colour
                     }
                 />
-                {move.name}
+                <div className="text-lg text-left">{move.name}</div>
+                <div className="text-sm text-gray-300 pl-2 pt-[2px]">
+                    {"(" + move.pack + ")"}
+                </div>
             </div>
             <div
                 className={
@@ -58,6 +69,6 @@ export function Move(props: { move: Move }) {
                     {move.description}
                 </div>
             </div>
-        </a>
+        </div>
     );
 }

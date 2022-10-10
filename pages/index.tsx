@@ -1,15 +1,15 @@
-import Head from "next/head";
 import {
-    PlayIcon,
-    ExclamationTriangleIcon,
     BookOpenIcon,
+    ExclamationTriangleIcon,
     HomeIcon,
     MagnifyingGlassIcon,
+    PlayIcon,
+    FaceFrownIcon,
 } from "@heroicons/react/24/outline";
+import Head from "next/head";
 
+import { Move } from "Moo/components/move";
 import {
-    ChangeEvent,
-    ChangeEventHandler,
     MouseEventHandler,
     ReactNode,
     useEffect,
@@ -17,16 +17,24 @@ import {
     useState,
 } from "react";
 import styles from "../src/style/index.module.css";
-import { Move } from "Moo/components/move";
 
 export default function Main() {
     const [page, setPage] = useState(0);
+    const [allMoves, setAllMoves] = useState<Move[]>(undefined);
     const pageIntro = <PageIntro />;
-    const pageMoves = <PageMoves />;
+    const pageMoves = <PageMoves allMoves={allMoves} />;
+
+    useEffect(() => {
+        fetch("/moves.json")
+            .then((r) => r.json())
+            .then((data: Move[]) => {
+                setAllMoves(data);
+            });
+    }, []);
 
     return (
         <>
-            <div className="absolute text-center text-white font-readex-pro flex flex-col w-full h-[calc(100vh-4.7em)] bg-[#1b1a27] overflow-hidden">
+            <div className="text-center text-white font-readex-pro flex flex-col w-full">
                 <Head>
                     <title>Moo Rules</title>
                     <meta
@@ -34,7 +42,15 @@ export default function Main() {
                         content="initial-scale=1.0, width=device-width"
                     />
                 </Head>
-                {page === 0 ? pageIntro : pageMoves}
+                {page === 0 ? (
+                    pageIntro
+                ) : page === 1 ? (
+                    <PageMissing />
+                ) : page === 2 ? (
+                    pageMoves
+                ) : (
+                    <PageMissing />
+                )}
             </div>
             <Footer page={page} setPage={setPage} />
         </>
@@ -43,11 +59,11 @@ export default function Main() {
 
 function PageIntro() {
     return (
-        <>
+        <div className="min-h-screen flex flex-col">
             <div className="font-roboto pt-4">
                 Don't you get it, Brian? I am VGHS.
             </div>
-            <div className="font-roboto font-normal text-7xl grow justify-center flex flex-col xl:flex-row xl:items-center xl:justify-center">
+            <div className="font-roboto font-normal text-7xl grow justify-center flex flex-col xl:flex-row xl:items-center xl:justify-center pb-32">
                 <div>Welcome, to</div>
                 <svg
                     height="1.5em"
@@ -63,13 +79,25 @@ function PageIntro() {
                     </g>
                 </svg>
             </div>
-        </>
+        </div>
     );
 }
 
-function PageMoves() {
-    const [allMoves, setAllMoves] = useState<Move[]>(undefined);
+function PageMissing() {
+    return (
+        <div className="min-h-screen flex flex-col items-center p-6 gap-6">
+            <FaceFrownIcon className="h-64 w-64 mt-24" />
+            <div className="text-4xl">Whoops!</div>
+            <div>We've not quite finished this page yet. Come again later!</div>
+        </div>
+    );
+}
+
+function PageMoves(props: { allMoves: Move[] }) {
+    const { allMoves } = props;
+
     const [filteredMoves, setFilteredMoves] = useState<Move[]>(undefined);
+    const [openMove, setOpenMove] = useState<Move>(undefined);
     const onSearchUpdate = (changeEvent?: any) => {
         let s = changeEvent?.target.value.toLocaleLowerCase();
         setFilteredMoves(() => {
@@ -79,23 +107,24 @@ function PageMoves() {
             );
         });
     };
-    useEffect(() => {
-        fetch("/moves.json")
-            .then((r) => r.json())
-            .then((data: Move[]) => {
-                setAllMoves(data);
-                setFilteredMoves(data);
-            });
-    }, []);
 
+    useEffect(() => setFilteredMoves(allMoves), []);
+
+    const onMoveClicked = (m: Move) => () => setOpenMove(m);
     return (
-        <div className="w-full flex flex-col h-[calc(100vh-8em)]">
-            <div className="flex flex-col p-2 items-center">
+        <div className="w-full flex flex-col bg-[#1b1a27]">
+            <div className="flex flex-col p-2 items-center sticky top-0 bg-[#1b1a27] z-10">
                 <Search onSearchUpdate={onSearchUpdate} />
             </div>
-            <div className="flex flex-col p-2 items-center grow overflow-y-scroll">
+            <div className="flex flex-col px-2 items-center grow mb-[60px]">
                 {filteredMoves?.map((m: Move, index: number) => (
-                    <Move key={index} move={m} />
+                    <Move
+                        key={allMoves.indexOf(m)}
+                        move={m}
+                        open={openMove === m}
+                        onClick={onMoveClicked(m)}
+                        index={index}
+                    />
                 ))}
             </div>
         </div>
@@ -103,22 +132,25 @@ function PageMoves() {
 }
 
 function Search(props: { onSearchUpdate: (changeEvent) => void }) {
-    const iconSize = "w-6 h-6";
+    const iconSize = "w-8 h-8 sm:w-6 sm:h-6 stroke-2";
     const ref = useRef(null);
 
     return (
-        <div className="relative group flex flex-row items-center justify-center transition-all duration-200 max-w-2xl w-full pt-2">
+        <div className="relative group flex flex-row items-center justify-center transition-all duration-200 max-w-lg w-full">
             <input
                 ref={ref}
                 onChange={props.onSearchUpdate}
-                className="peer border-none outline-none rounded-md w-full max-w-lg text-black p-2 text-center"
+                className={
+                    "peer border-none outline-none rounded-md w-full text-black p-2 text-center group-hover:ml-12 focus:ml-12 transition-all " +
+                    (ref.current?.value.length > 0 ? " !ml-12" : "")
+                }
             />
             <MagnifyingGlassIcon
                 className={
                     iconSize +
-                    " absolute group-hover:mr-[550px] peer-focus:mr-[550px] peer-focus:text-white text-[#37354F] group-hover:text-white transform-all duration-500" +
+                    " absolute group-hover:mr-[calc(100%-48px)] peer-focus:mr-[calc(100%-48px)] peer-focus:text-white text-[#37354F] group-hover:text-white transform-all duration-300" +
                     (ref.current?.value.length > 0
-                        ? " !mr-[550px] !text-white"
+                        ? " !mr-[calc(100%-48px)] !text-white"
                         : "")
                 }
             />
@@ -137,24 +169,29 @@ function FooterButton(props: {
     return (
         <div
             className={
-                "xs:text-sm text-xs transition-colors duration-400 p-2 grow items-center flex flex-col cursor-pointer " +
-                (!selected ? " bg-white text-[#1b1a27]" : "")
+                "xs:text-sm text-xs transition-colors duration-200 p-2 flex-1 items-center flex flex-col cursor-pointer " +
+                (!selected ? " text-[#1b1a27]" : "")
             }
             onClick={clickHandler}
         >
             {icon}
-            <div className="">{label}</div>
+            <div className="translate-y-[2px]">{label}</div>
         </div>
     );
 }
 
 function Footer(props: { page: number; setPage: (page: number) => void }) {
     const { page, setPage } = props;
-    const iconSize = "w-6 h-6";
+    const iconSize = "w-6 h-6 stroke-2";
 
     return (
-        <div className="bg-[#1b1a27] text-slate-300 fixed bottom-0 w-full flex justify-center">
-            <div className="flex overflow-hidden grow">
+        //#1b1a27
+        <div className="fixed bottom-0 bg-white text-slate-100 w-full flex font-readex-pro">
+            <div
+                className="transform-all duration-200 absolute h-full w-[25%] bg-[#1b1a27] -z-10"
+                style={{ transform: `translateX(${100 * page}%)` }}
+            ></div>
+            <div className="flex grow">
                 <FooterButton
                     selected={page == 0}
                     icon={<HomeIcon className={iconSize} />}
