@@ -1,5 +1,4 @@
-import "../src/style/test.css";
-// import "tailwindcss/tailwind.css";
+import "../style/global.css";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 

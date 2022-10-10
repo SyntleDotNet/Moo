@@ -16,7 +16,7 @@ import {
     useRef,
     useState,
 } from "react";
-import styles from "../src/style/index.module.css";
+import styles from "../style/index.module.css";
 
 export default function Main() {
     const [page, setPage] = useState(0);
