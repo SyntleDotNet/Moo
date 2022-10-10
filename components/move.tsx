@@ -37,7 +37,7 @@ export function Move(props: {
     return (
         <div
             className={
-                "opacity-0 cursor-pointer transition-all duration-200 max-w-2xl bg-white sm:hover:bg-[#37354F] sm:hover:text-white sm:hover:border-[#37354F] w-full text-gray-600 mb-2 rounded-lg p-4 border flex flex-col animate-[slide_0.2s_ease-in-out_forwards]" +
+                "opacity-0 cursor-pointer transition-all duration-75 max-w-2xl bg-white sm:hover:bg-[#37354F] sm:hover:text-white sm:hover:border-[#37354F] w-full text-gray-600 mb-2 rounded-lg p-4 border flex flex-col animate-[slide_0.2s_ease-in-out_forwards]" +
                 (open ? " !bg-[#37354F] !text-white !border-[#37354F]" : "")
             }
             onClick={onClick}

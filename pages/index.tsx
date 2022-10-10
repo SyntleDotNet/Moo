@@ -34,7 +34,7 @@ export default function Main() {
 
     return (
         <>
-            <div className="text-center text-white font-readex-pro flex flex-col w-full">
+            <div className="text-center text-white font-readex-pro flex flex-col w-full pb-[60px] min-h-screen">
                 <Head>
                     <title>Moo Rules</title>
                     <meta
@@ -59,7 +59,7 @@ export default function Main() {
 
 function PageIntro() {
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="flex flex-col grow">
             <div className="font-roboto pt-4">
                 Don't you get it, Brian? I am VGHS.
             </div>
@@ -85,7 +85,7 @@ function PageIntro() {
 
 function PageMissing() {
     return (
-        <div className="min-h-screen flex flex-col items-center p-6 gap-6">
+        <div className="grow flex flex-col items-center p-6 gap-6">
             <FaceFrownIcon className="h-64 w-64 mt-24" />
             <div className="text-4xl">Whoops!</div>
             <div>We've not quite finished this page yet. Come again later!</div>
@@ -110,13 +110,15 @@ function PageMoves(props: { allMoves: Move[] }) {
 
     useEffect(() => setFilteredMoves(allMoves), []);
 
-    const onMoveClicked = (m: Move) => () => setOpenMove(m);
+    const onMoveClicked = (m: Move) => () => {
+        m === openMove ? setOpenMove(undefined) : setOpenMove(m);
+    };
     return (
         <div className="w-full flex flex-col bg-[#1b1a27]">
             <div className="flex flex-col p-2 items-center sticky top-0 bg-[#1b1a27] z-10">
                 <Search onSearchUpdate={onSearchUpdate} />
             </div>
-            <div className="flex flex-col px-2 items-center grow mb-[60px]">
+            <div className="flex flex-col px-2 items-center grow">
                 {filteredMoves?.map((m: Move, index: number) => (
                     <Move
                         key={allMoves.indexOf(m)}
