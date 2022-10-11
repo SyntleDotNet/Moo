@@ -5,9 +5,10 @@ import {
     MagnifyingGlassIcon,
     PlayIcon,
     FaceFrownIcon,
+    FunnelIcon,
 } from "@heroicons/react/24/outline";
 import Head from "next/head";
-
+import clsx from "clsx";
 import { Move } from "Moo/components/move";
 import {
     MouseEventHandler,
@@ -17,6 +18,70 @@ import {
     useState,
 } from "react";
 import styles from "../style/index.module.css";
+import useIsMounted from "Moo/components/useIsMounted";
+
+type Colour = {
+    text: string;
+    bg: string;
+    border: string;
+    hover: string;
+};
+
+const colours: { [k: string]: Colour } = {
+    sky: {
+        text: "text-sky-400",
+        bg: "!bg-sky-400",
+        border: "border-sky-400",
+        hover: "hover:bg-sky-400",
+    },
+    yellow: {
+        text: "text-yellow-400",
+        bg: "!bg-yellow-400",
+        border: "border-yellow-400",
+        hover: "hover:bg-yellow-400",
+    },
+    lime: {
+        text: "text-lime-400",
+        bg: "!bg-lime-400",
+        border: "border-lime-400",
+        hover: "hover:bg-lime-400",
+    },
+    red: {
+        text: "text-red-400",
+        bg: "!bg-red-400",
+        border: "border-red-400",
+        hover: "hover:bg-red-400",
+    },
+    violet: {
+        text: "text-violet-400",
+        bg: "!bg-violet-400",
+        border: "border-violet-400",
+        hover: "hover:bg-violet-400",
+    },
+    orange: {
+        text: "text-orange-400",
+        bg: "!bg-orange-400",
+        border: "border-orange-400",
+        hover: "hover:bg-orange-400",
+    },
+};
+
+type Pack = {
+    colour: Colour;
+    enabled: boolean;
+};
+
+const packs: { [k: string]: Pack } = {
+    basic: { colour: colours.sky, enabled: true },
+    expansion1: { colour: colours.yellow, enabled: true },
+    expansion2: { colour: colours.lime, enabled: true },
+    expansion3: { colour: colours.red, enabled: true },
+    expansion4: { colour: colours.violet, enabled: true },
+    "simple fish rules (trash only liked by Rohit)": {
+        colour: colours.orange,
+        enabled: true,
+    },
+};
 
 export default function Main() {
     const [page, setPage] = useState(0);
@@ -96,8 +161,12 @@ function PageMissing() {
 function PageMoves(props: { allMoves: Move[] }) {
     const { allMoves } = props;
 
-    const [filteredMoves, setFilteredMoves] = useState<Move[]>(undefined);
+    const [filteredMoves, setFilteredMoves] = useState<Move[]>(allMoves);
     const [openMove, setOpenMove] = useState<Move>(undefined);
+    const [, setToggle] = useState(false);
+    const [filterOpen, setFilterOpen] = useState(false);
+    const [justOpenedFilter, setJustOpenedFilter] = useState(true);
+
     const onSearchUpdate = (changeEvent?: any) => {
         let s = changeEvent?.target.value.toLocaleLowerCase();
         setFilteredMoves(() => {
@@ -108,20 +177,90 @@ function PageMoves(props: { allMoves: Move[] }) {
         });
     };
 
-    useEffect(() => setFilteredMoves(allMoves), []);
-
     const onMoveClicked = (m: Move) => () => {
         m === openMove ? setOpenMove(undefined) : setOpenMove(m);
     };
+
+    const onFilterItemClicked = (p: Pack) => () => {
+        p.enabled = !p.enabled;
+        setToggle((p) => !p);
+        setJustOpenedFilter(false);
+    };
+
+    const isMounted = useIsMounted();
+
+    console.log(isMounted);
+
     return (
         <div className="w-full flex flex-col bg-[#1b1a27]">
-            <div className="flex flex-col p-2 items-center sticky top-0 bg-[#1b1a27] z-10">
-                <Search onSearchUpdate={onSearchUpdate} />
+            <div className="flex flex-col p-2 sticky top-0 bg-[#1b1a27] z-10 justify-center">
+                <div className="flex flex-row justify-center">
+                    <Search onSearchUpdate={onSearchUpdate} />
+                    <Filter
+                        onClick={() => {
+                            setFilterOpen((o) => !o);
+                            setJustOpenedFilter(true);
+                        }}
+                        filterOpen={filterOpen}
+                    />
+                </div>
+                <div className="flex flex-row justify-center">
+                    <div className="relative flex flex-row max-w-xl grow justify-end">
+                        <div
+                            className={clsx(
+                                "absolute rounded-md mt-2 text-black flex flex-col items-end gap-2 pb-4 px-4 -mx-4",
+                                !filterOpen && "pointer-events-none"
+                            )}
+                        >
+                            {Object.keys(packs).map((key, index) => {
+                                const pack = packs[key];
+                                return (
+                                    <div
+                                        key={index}
+                                        className={clsx(
+                                            pack.colour.border,
+                                            pack.colour.bg,
+                                            "pointer-events-auto border max-w-fit p-1 px-3 bg-white rounded-full cursor-pointer transition-colors whitespace-nowrap overflow-hidden flex justify-center items-center",
+                                            filterOpen
+                                                ? "opacity-0 animate-[filterPop_0.3s_ease-in-out_forwards]"
+                                                : isMounted &&
+                                                      "animate-[filterPopIn_0.3s_ease-in-out_forwards]",
+                                            pack.enabled
+                                                ? "text-white"
+                                                : "delay-100"
+                                        )}
+                                        style={{
+                                            animationDelay: `${
+                                                (filterOpen
+                                                    ? index
+                                                    : Object.keys(packs)
+                                                          .length -
+                                                      index -
+                                                      1) * 0.03
+                                            }s`,
+                                        }}
+                                        onClick={onFilterItemClicked(pack)}
+                                    >
+                                        <div
+                                            className={clsx(
+                                                "absolute aspect-square w-[100%] -z-10 rounded-full bg-white",
+                                                !packs[key].enabled
+                                                    ? "animate-[widen_0.3s_ease-in-out_forwards]"
+                                                    : "animate-[shrink_0.3s_ease-in-out_forwards]"
+                                            )}
+                                        ></div>
+                                        {key}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className="flex flex-col px-2 items-center grow">
                 {filteredMoves?.map((m: Move, index: number) => (
                     <Move
-                        key={allMoves.indexOf(m)}
+                        key={index}
                         move={m}
                         open={openMove === m}
                         onClick={onMoveClicked(m)}
@@ -133,12 +272,29 @@ function PageMoves(props: { allMoves: Move[] }) {
     );
 }
 
-function Search(props: { onSearchUpdate: (changeEvent) => void }) {
+function Filter(props: { onClick: () => void; filterOpen: boolean }) {
+    const { onClick, filterOpen } = props;
+    return (
+        <div
+            className="bg-white rounded-md p-2 text-[#1b1a27] ml-2 hover:text-white hover:bg-[#37354F] cursor-pointer transition-all duration-200"
+            onClick={onClick}
+        >
+            <FunnelIcon
+                className={clsx(
+                    "w-6 h-6 transition-transform duration-200",
+                    filterOpen && "rotate-180"
+                )}
+            />
+        </div>
+    );
+}
+
+function Search(props: { onSearchUpdate: (changeEvent: any) => void }) {
     const iconSize = "w-8 h-8 sm:w-6 sm:h-6 stroke-2";
     const ref = useRef(null);
 
     return (
-        <div className="relative group flex flex-row items-center justify-center transition-all duration-200 max-w-lg w-full">
+        <div className="relative group flex flex-row items-center justify-center transition-all duration-200 max-w-lg w-full grow">
             <input
                 ref={ref}
                 onChange={props.onSearchUpdate}
@@ -148,13 +304,12 @@ function Search(props: { onSearchUpdate: (changeEvent) => void }) {
                 }
             />
             <MagnifyingGlassIcon
-                className={
-                    iconSize +
-                    " absolute group-hover:mr-[calc(100%-48px)] peer-focus:mr-[calc(100%-48px)] peer-focus:text-white text-[#37354F] group-hover:text-white transform-all duration-300" +
-                    (ref.current?.value.length > 0
-                        ? " !mr-[calc(100%-48px)] !text-white"
-                        : "")
-                }
+                className={clsx(
+                    iconSize,
+                    "absolute group-hover:mr-[calc(100%-48px)] peer-focus:mr-[calc(100%-48px)] peer-focus:text-white text-[#37354F] group-hover:text-white transform-all duration-300",
+                    ref.current?.value.length > 0 &&
+                        "!mr-[calc(100%-48px)] !text-white"
+                )}
             />
         </div>
     );
@@ -188,7 +343,7 @@ function Footer(props: { page: number; setPage: (page: number) => void }) {
 
     return (
         //#1b1a27
-        <div className="fixed bottom-0 bg-white text-slate-100 w-full flex font-readex-pro">
+        <div className="fixed bottom-0 bg-white text-slate-100 w-full flex font-readex-pro overflow-hidden">
             <div
                 className="transform-all duration-200 absolute h-full w-[25%] bg-[#1b1a27] -z-10"
                 style={{ transform: `translateX(${100 * page}%)` }}

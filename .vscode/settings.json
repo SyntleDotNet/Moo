@@ -5,4 +5,5 @@
         "editor.defaultFormatter": "vscode.html-language-features"
     },
     "editor.formatOnSave": true,
+    "css.lint.unknownAtRules": "ignore"
 }

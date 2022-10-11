@@ -6,11 +6,15 @@
         "Bladen",
         "CelesTrak",
         "Colour",
+        "colours",
         "gentlepersonhood",
         "philbladen",
         "Roboto",
         "utilise",
         "webfontloader"
     ],
-    "import": []
+    "import": [],
+    "ignoreWords": [
+        "clsx"
+    ]
 }

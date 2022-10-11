@@ -1,6 +1,6 @@
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import { PlayIcon as PlayIconSolid } from "@heroicons/react/24/solid";
-import styles from "../src/style/index.module.css";
+import clsx from "clsx";
 
 export type Move = {
     name: string;
@@ -36,10 +36,10 @@ export function Move(props: {
     }, [open, move]);
     return (
         <div
-            className={
-                "opacity-0 cursor-pointer transition-all duration-75 max-w-2xl bg-white sm:hover:bg-[#37354F] sm:hover:text-white sm:hover:border-[#37354F] w-full text-gray-600 mb-2 rounded-lg p-4 border flex flex-col animate-[slide_0.2s_ease-in-out_forwards]" +
-                (open ? " !bg-[#37354F] !text-white !border-[#37354F]" : "")
-            }
+            className={clsx(
+                "opacity-0 cursor-pointer transition-all duration-75 max-w-2xl bg-white sm:hover:bg-[#37354F] sm:hover:text-white w-full text-gray-600 mb-2 rounded-lg p-4 flex flex-col animate-[slide_0.2s_ease-in-out_forwards]",
+                open && "!bg-[#37354F] !text-white"
+            )}
             onClick={onClick}
             style={{ animationDelay: `${index * 0.02}s` }}
         >
